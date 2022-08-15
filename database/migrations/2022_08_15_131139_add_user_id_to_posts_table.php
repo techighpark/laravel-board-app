@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('boards', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('boards', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned()->index();
         });
     }
 
@@ -27,6 +25,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('boards');
+        Schema::table('boards', function (Blueprint $table) {
+                // rollback할 때
+                $table->dropColumn('user_id');
+        });
     }
 };
