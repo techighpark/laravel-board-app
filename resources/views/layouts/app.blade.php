@@ -5,14 +5,13 @@
     <head>
         <title>Laravel - Board</title>
 
-        <!-- CSS And JavaScript -->
     </head>
 
     <body>
         <div class="container">
-            <nav class="navbar navbar-default">
-                <!-- Navbar Contents -->
-            </nav>
+           <h1>Laravel Board</h1>
+           <a href="{{ url('/')}}">Go Home</a>
+
         </div>
 
         @yield('content')

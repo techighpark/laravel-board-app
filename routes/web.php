@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Board;
+use App\Http\Controllers\BoardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,34 +15,10 @@ use App\Models\Board;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    $boards = Board::orderBy('created_at', 'asc')->get();
-    return view('boards', [
-        'boards' => $boards
-    ]);
-});
-
-
-Route::post('/board', function (Request $request) {
-    $validator = Validator::make($request->all(), [
-        'name' => 'required|max:255',
-    ]);
-
-    if ($validator->fails()) {
-        return redirect('/')
-            ->withInput()
-            ->withErrors($validator);
-    }
-
-    $board = new Board;
-    $board->name = $request->name;
-    $board->save();
-
-    return redirect('/');
-});
-
-Route::delete('/board/{board}', function (Board $board) {
-    $board->delete();
-    return redirect('/');
-});
+Route::get('/', [BoardController::class, 'index']);
+Route::get('/board/create', [BoardController::class, 'create']);
+Route::get('/board/{id}', [BoardController::class, 'show']);
+Route::post('/board/create', [BoardController::class, 'store']);
+Route::delete('/board/delete/{board}', [BoardController::class, 'delete']);
+Route::get('/board/edit/{id}', [BoardController::class, 'edit']);
+Route::post('/board/editProcess/{id}', [BoardController::class, 'editProcess']);

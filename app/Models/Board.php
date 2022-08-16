@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Author;
+use App\Models\User;
 
 
 
@@ -17,14 +17,14 @@ class Board extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['title','contents'];
 
     /**
      * Get the user that owns the task.
      */
-    public function author()
+    public function user()
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsTo(User::class);
     }
     
 }

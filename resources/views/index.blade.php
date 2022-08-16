@@ -1,58 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Create Task Form... -->
 
     <div>
-        <!-- Display Validation Errors -->
         @include('common.errors')
 
-        <!-- New Task Form -->
-        <form action="{{ url('board') }}" method="POST">
-            {{ csrf_field() }}
+        @if (count($boards) === 0)
+        게시물을 작성해보세요.
+        @endif
 
-            <!-- Task Name -->
-            <div>
-                <label for="task">Content</label>
 
-                <div>
-                    <input type="text" name="name">
-                </div>
-            </div>
-
-            <!-- Add Task Button -->
+        <form action="{{ url('board/create') }}" method="GET">
             <div>
                 <div>
-                    <button type="submit">
-                         Create
+                    <button>
+                        Create
                     </button>
                 </div>
             </div>
         </form>
     </div>
-    <!-- Current Tasks -->
     @if (count($boards) > 0)
         <div>
             <div>
-                Laravel - Board
+                <h3>Board List</h3>
             </div>
 
             <div>
                 <table>
 
-                    <!-- Table Headings -->
                     <thead>
-                        <th>List</th>
+                        <th>Title</th>
                         <th>&nbsp;</th>
                     </thead>
 
-                    <!-- Table Body -->
                     <tbody>
                         @foreach ($boards as $board)
                         <tr>
-                            <!-- Task Name -->
                             <td >
-                                <div>{{ $board->name }}</div>
+                                <div><a href="{{ url('board/'.$board->id) }}">{{ $board->title }}</a></div>
                             </td>
 
                             <!-- Delete Button -->

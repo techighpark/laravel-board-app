@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('boards', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->index();
+            $table->renameColumn('name', 'title');
+            $table->string('contents');
         });
     }
 
@@ -26,8 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('boards', function (Blueprint $table) {
-                // rollback할 때
-                $table->dropColumn('user_id');
+            $table->dropColumn('contents');
         });
     }
 };
