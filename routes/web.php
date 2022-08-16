@@ -22,3 +22,7 @@ Route::post('/board/create', [BoardController::class, 'store']);
 Route::delete('/board/delete/{board}', [BoardController::class, 'delete']);
 Route::get('/board/edit/{id}', [BoardController::class, 'edit']);
 Route::post('/board/editProcess/{id}', [BoardController::class, 'editProcess']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
